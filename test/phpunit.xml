@@ -1,0 +1,16 @@
+<phpunit bootstrap="bootstrap.php" colors="true" backupGlobals="false" stopOnFailure="false" syntaxCheck="false">
+
+    <testsuite name="OMS Application Test Suite">
+        <directory>.</directory>
+    </testsuite>
+
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix="Test.php">.</directory>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="coverage-clover" target="clover.xml"/>
+    </logging>
+</phpunit>
+

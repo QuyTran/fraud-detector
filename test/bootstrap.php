@@ -1,7 +1,7 @@
 <?php
 function autoloadModel($className) {
     // autoload for model
-    $filename = __DIR__ . "/" . str_replace("\\", '/', $className) . ".php";
+    $filename = __DIR__ . "/../" . str_replace("\\", '/', $className) . ".php";
 
     if (file_exists($filename)) {
         include($filename);
@@ -11,7 +11,7 @@ function autoloadModel($className) {
     }
 
     // autoload vendor
-    $sLibPath = 'vendor/lib/';
+    $sLibPath = '../vendor/lib/';
     $sClassFile = str_replace('\\' , DIRECTORY_SEPARATOR , $className) . '.php';
     $sClassPath = $sLibPath . $sClassFile;
 
@@ -24,10 +24,3 @@ function autoloadModel($className) {
     return false;
 }
 spl_autoload_register("autoloadModel");
-
-if (!empty($_POST)) {
-    file_put_contents(__DIR__ . '/logs/post.log', print_r($_POST, 1), FILE_APPEND);
-    $order = new \Model\Order($_POST);
-    echo $order->getOutput();
-    exit();
-}

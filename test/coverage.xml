@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1491129752">
+  <project timestamp="1491129752">
+    <package name="Model">
+      <file name="/Users/VNHCLZ0218/Working/fraud-detector/test/BaseTest.php">
+        <class name="BaseTest" namespace="Model">
+          <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+        </class>
+        <line num="5" type="method" name="testTest1" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="7" type="stmt" count="1"/>
+        <line num="8" type="stmt" count="1"/>
+        <line num="9" type="stmt" count="1"/>
+        <metrics loc="10" ncloc="10" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+      </file>
+    </package>
+    <metrics files="1" loc="10" ncloc="10" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+  </project>
+</coverage>

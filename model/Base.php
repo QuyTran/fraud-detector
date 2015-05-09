@@ -1,6 +1,7 @@
 <?php
 namespace Model;
 use Everyman\Neo4j\Client;
+use Everyman\Neo4j\Exception;
 use Everyman\Neo4j\Index\NodeIndex;
 use Everyman\Neo4j\Cypher;
 /**
@@ -11,6 +12,7 @@ abstract class Base
 {
     const NAME = 'name';
     const DATE = 'date';
+    const TYPE = 'type';
 
     /**
      * @var Client|null
@@ -35,12 +37,22 @@ abstract class Base
     /**
      * make a new node
      * @param array $input
-     * @return int
-     * @throws \Everyman\Neo4j\Exception
+     * @param null $type
+     * @return \Everyman\Neo4j\PropertyContainer
+     * @throws Exception
      */
-    public function makeNode($input = array())
+    public function makeNode($input = array(), $type = null)
     {
-        $node = $this->client->makeNode()->setProperty(static::NAME, $input[static::NAME])->save();
+        $node = $this->client
+                    ->makeNode()
+                    ->setProperties(
+                        array(
+                            static::NAME => $input[static::NAME],
+                            static::TYPE => $type
+                        )
+                    )
+                    ->save();
+        $this->actors->add($node, static::NAME, $node->getProperty(static::NAME));
         return $node;
     }
 
@@ -92,15 +104,33 @@ abstract class Base
     /**
      * get or create new node
      * @param $value
-     * @return int|void
+     * @param $type
+     * @return \Everyman\Neo4j\PropertyContainer|int
      */
-    public function getOrCreateNode($value)
+    public function getOrCreateNode($value, $type)
     {
-        $data = $this->getByProperty(static::NAME, $value);
-        if ($data->count() > 0) {
-            return $data->rewind();
-        } else {
-            return $this->makeNode(array(static::NAME => $value));
+        try {
+            $node = $this->actors->findOne(static::NAME, $value);
+            if ($node) {
+                return $node;
+            } else {
+                return $this->makeNode(array(static::NAME => $value), $type);
+            }
+        } catch (Exception $e) {
+            return $this->makeNode(array(static::NAME => $value), $type);
         }
+    }
+
+    /**
+     * @return Client|null
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    public function test1($var)
+    {
+        return ++$var;
     }
 }
