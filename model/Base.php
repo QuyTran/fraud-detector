@@ -2,13 +2,16 @@
 namespace Model;
 use Everyman\Neo4j\Client;
 use Everyman\Neo4j\Index\NodeIndex;
-
+use Everyman\Neo4j\Cypher;
 /**
  * Class Base
  * @package Model
  */
 abstract class Base
 {
+    const NAME = 'name';
+    const DATE = 'date';
+
     /**
      * @var Client|null
      */
@@ -37,8 +40,8 @@ abstract class Base
      */
     public function makeNode($input = array())
     {
-        $node = $this->client->makeNode()->setProperty('name', $input['name'])->save();
-        return $node->getId();
+        $node = $this->client->makeNode()->setProperty(static::NAME, $input[static::NAME])->save();
+        return $node;
     }
 
     /**
@@ -52,7 +55,52 @@ abstract class Base
     {
         $date = date('G:i:s d-m-Y');
         return $nodeA->relateTo($nodeB, $name)
-            ->setProperty('date', $date)
+            ->setProperty(static::DATE, $date)
             ->save();
+    }
+
+    /**
+     * get output, should be json
+     * @return mixed
+     */
+    abstract function getOutput();
+
+    /**
+     * use Cypher to query
+     * @param $queryTemplate
+     * @param array $data
+     * @return \Everyman\Neo4j\Query\ResultSet
+     */
+    public function query($queryTemplate)
+    {
+        $query = new Cypher\Query($this->client, $queryTemplate);
+        return $query->getResultSet();
+    }
+
+    /**
+     * get nodes by property
+     * @param $name
+     * @param $value
+     * @return \Everyman\Neo4j\Query\ResultSet
+     */
+    public function getByProperty($name, $value)
+    {
+        $queryTemplate = "MATCH (n) WHERE n.`$name` = '$value' RETURN n";
+        return $this->query($queryTemplate);
+    }
+
+    /**
+     * get or create new node
+     * @param $value
+     * @return int|void
+     */
+    public function getOrCreateNode($value)
+    {
+        $data = $this->getByProperty(static::NAME, $value);
+        if ($data->count() > 0) {
+            return $data->rewind();
+        } else {
+            return $this->makeNode(array(static::NAME => $value));
+        }
     }
 }
