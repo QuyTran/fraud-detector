@@ -1,0 +1,6 @@
+{
+  "name": "Fraud-detector",
+  "tagline": "This project use graph database to check if a person is trying to cheat when purchasing our a e-commerce website",
+  "body": "# fraud-detector\r\nThis project use graph database to check if a person is trying to cheat when purchasing our a e-commerce website\r\n\r\n#usage\r\n\r\nplease POST the request to index.php, the POST should contain\r\n- session_id\r\n- ip address\r\n- email address\r\n- phone\r\n\r\nsample:\r\n\r\narray{\r\n    'session_id' => 634ashdasdv1623=234,\r\n    'ip' => '192.168.23.4',\r\n    'email' => 'sample@gmail.com',\r\n    'phone' => '+847236478234'\r\n}\r\n\r\n# return\r\narray{\r\n    'weight' => integer\r\n}\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}

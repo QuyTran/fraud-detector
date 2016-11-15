@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Fraud-detector by QuyTran</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Fraud-detector</h1>
+        <p>This project use graph database to check if a person is trying to cheat when purchasing our a e-commerce website</p>
+
+        <p class="view"><a href="https://github.com/QuyTran/fraud-detector">View the Project on GitHub <small>QuyTran/fraud-detector</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/QuyTran/fraud-detector/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/QuyTran/fraud-detector/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/QuyTran/fraud-detector">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="fraud-detector" class="anchor" href="#fraud-detector" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>fraud-detector</h1>
+
+<p>This project use graph database to check if a person is trying to cheat when purchasing our a e-commerce website</p>
+
+<h1>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>usage</h1>
+
+<p>please POST the request to index.php, the POST should contain</p>
+
+<ul>
+<li>session_id</li>
+<li>ip address</li>
+<li>email address</li>
+<li>phone</li>
+</ul>
+
+<p>sample:</p>
+
+<p>array{
+    'session_id' =&gt; 634ashdasdv1623=234,
+    'ip' =&gt; '192.168.23.4',
+    'email' =&gt; '<a href="mailto:sample@gmail.com">sample@gmail.com</a>',
+    'phone' =&gt; '+847236478234'
+}</p>
+
+<h1>
+<a id="return" class="anchor" href="#return" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>return</h1>
+
+<p>array{
+    'weight' =&gt; integer
+}</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/QuyTran">QuyTran</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
